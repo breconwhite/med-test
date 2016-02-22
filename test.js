@@ -37,7 +37,7 @@ function shuffle(array){
 
 function nextQuestion(){
 	curQuest ++;
-	$("#question > h2").text("<small>What is the abbreviation of </small> "+questions[curQuest]["text"]);
+	$("#question > h2").html("<small>What is the abbreviation of </small> "+questions[curQuest]["text"]);
 	curAnswer = questions[curQuest]["abr"];
 }
 
