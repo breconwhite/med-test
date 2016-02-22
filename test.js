@@ -12,10 +12,8 @@ function loadText(){
 
 function sortQuestions(data){
 	var sortData = JSON.parse(data);
-	console.log(sortData);
 
 	questions = shuffle(sortData);
-	console.log(questions);
 
 	curQuest = -1;
 	nextQuestion();
@@ -36,32 +34,42 @@ function shuffle(array){
 }
 
 function nextQuestion(){
-	curQuest ++;
-	$("#question > h2").html("<small>What is the abbreviation of </small> "+questions[curQuest]["text"]);
-	curAnswer = questions[curQuest]["abr"];
+	if(questions[curQuest+1]){
+		curQuest ++;
+		$("#question > h2").html("<small>What is the abbreviation of </small> "+questions[curQuest]["text"]);
+		curAnswer = questions[curQuest]["abr"];
+	}
+	else{
+		$("#message").html("<h2 class='end'>That's all of them! Refresh the page to try again!</h2>");
+	}
 }
 
 function submit(){
-	var given = $("#givenAns").val();
-	if(given == curAnswer){
-		$("#message").html("<h2 class='right'>That's right! Great job!</h2>");
-		$("#givenAns").val("");
-		$("#past > ul").append("<li><b>"+questions[curQuest]["abr"]+"</b><span> - "+questions[curQuest]["text"]+"</span></li>")
-		nextQuestion();
-	}
-	else{
-		$("#message").html("<h2 class='wrong'>Sorry, that's wrong. Please try again. Maybe try another abbreviation?</h2>");
-		console.log(questions[curQuest]['abr']);
+	if(questions[curQuest+1]){
+		var given = $("#givenAns").val();
+		if(given == curAnswer){
+			$("#message").html("<h2 class='right'>That's right! Great job!</h2>");
+			$("#givenAns").val("");
+			$("#past > ul").append("<li><b>"+questions[curQuest]["abr"]+"</b><span> - "+questions[curQuest]["text"]+"</span></li>")
+			nextQuestion();
+		}
+		else{
+			$("#message").html("<h2 class='wrong'>Sorry, that's wrong. Please try again. Maybe try another abbreviation?</h2>");
+			console.log(questions[curQuest]['abr']);
+		}
 	}
 }
 
 function skip(){
 	//Skip the answer and add to the end.
+	//questions.push(questions[curQuest]);
 	nextQuestion();
 }
 
 function getAnswer(){
-	$("#message").html("<h2>The answer was "+questions[curQuest]['abr']+" ("+questions[curQuest]['text']+")</h2>");
-	$("#past > ul").append("<li><b>"+questions[curQuest]["abr"]+"</b><span> - "+questions[curQuest]["text"]+"</span></li>");
-	nextQuestion();
+	if(questions[curQuest+1]){
+		$("#message").html("<h2>The answer was "+questions[curQuest]['abr']+" ("+questions[curQuest]['text']+")</h2>");
+		$("#past > ul").append("<li><b>"+questions[curQuest]["abr"]+"</b><span> - "+questions[curQuest]["text"]+"</span></li>");
+		nextQuestion();
+	}
 }
