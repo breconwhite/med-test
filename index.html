@@ -1,0 +1,27 @@
+<script src='test.js'></script>
+
+<style>
+	.right{color:#2C2;}
+	.wrong{color:#C22;}
+</style>
+
+<body onload="loadText()">
+	<div id='question'>
+		<h2>Question</h2>
+	</div>
+	<div id='answer'>
+		<input id='givenAns' type='text' placeholder='answer' name='ans'></input>
+		<button onclick='submit()'>Submit</button>
+		&nbsp;&nbsp; | &nbsp;&nbsp;
+		<button onclick='skip()'>Skip</button>
+		<button onclick='getAnswer()'>Answer</button>
+	</div>
+	<div id='message'></div>
+	<div id='past'>
+		<ul></ul>
+	</div>
+<body>
+
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.11.4/themes/smoothness/jquery-ui.css">
+<script src="http://code.jquery.com/jquery-1.12.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.11.4/jquery-ui.js"></script>
