@@ -55,15 +55,22 @@ function submit(){
 		}
 		else{
 			$("#message").html("<h2 class='wrong'>Sorry, that's wrong. Please try again. Maybe try another abbreviation?</h2>");
-			console.log(questions[curQuest]['abr']);
 		}
+	}
+	else{
+		$("#message").html("<h2 class='end'>That's all of them! Refresh the page to try again!</h2>");
 	}
 }
 
 function skip(){
 	//Skip the answer and add to the end.
-	//questions.push(questions[curQuest]);
-	nextQuestion();
+	if(questions[curQuest+1]){
+		questions.push(questions[curQuest]);
+		nextQuestion();
+	}
+	else{
+		$("#message").html("<h2 class='end'>That's all of them! Refresh the page to try again!</h2>");
+	}
 }
 
 function getAnswer(){
@@ -71,5 +78,8 @@ function getAnswer(){
 		$("#message").html("<h2>The answer was "+questions[curQuest]['abr']+" ("+questions[curQuest]['text']+")</h2>");
 		$("#past > ul").append("<li><b>"+questions[curQuest]["abr"]+"</b><span> - "+questions[curQuest]["text"]+"</span></li>");
 		nextQuestion();
+	}
+	else{
+		$("#message").html("<h2 class='end'>That's all of them! Refresh the page to try again!</h2>");
 	}
 }
